@@ -1,19 +1,19 @@
 <?php
 require_once './model/Pedido.php';
-require_once './utils/Archivador.php';
 require_once './middleware/JsonBodyParserMiddleware.php';
 
 class PedidoController{
 
     public function CrearPedido($request, $response, $args){
 
+        $rutaArchivo = 'imagenes/';
         $parametros = $request->getParsedBody();
         $pedido = new Pedido();
         $pedido->estado = $parametros['estado'];
-        $pedido->imagen = 'ruta/archivo/pepe';
         $pedido->nombreCliente = $parametros['nombreCliente'];
         $pedido->idMesa = $parametros['idMesa'];
         $pedido->itemsMenu = $parametros['menu'];
+        $pedido->imagen = $parametros['archivo'];
 
         try{
             $idPedido = $pedido->InsertarPedido();
