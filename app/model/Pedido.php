@@ -53,7 +53,20 @@ class Pedido
         }
 
     }
+
+    public static function ConsultarPedidos(){
+
+        try{
+            $dao = new DAO();
+            $query = $dao->prepararConsulta("SELECT * FROM pedidos;");
+            $query->execute();
+    
+            return $query->fetchAll(PDO::FETCH_CLASS, 'Pedido');
+        }
+        catch(Exception $e){
+            throw $e;
+        }
+    }
+
 }
-
-
 ?>

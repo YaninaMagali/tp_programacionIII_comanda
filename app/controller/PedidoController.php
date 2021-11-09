@@ -27,6 +27,19 @@ class PedidoController{
         $response->getBody()->write($payload);
         return $response->withHeader('Content-Type', 'application/json');
     }
+
+    public function ListarPedidos($request, $response, $args){
+        try{
+            $pedidos = Pedido::ConsultarPedidos();
+            $payload = json_encode(array("Pedidos" => $pedidos));
+        }
+        catch(Exception $e){
+            $payload = json_encode(array("Error" => $e));
+        }
+        
+        $response->getBody()->write($payload);
+        return $response->withHeader('Content-Type', 'application/json');
+    }
 }
 
 ?>
